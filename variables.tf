@@ -21,3 +21,9 @@ variable "route53_janus" {
 variable "ssh_key_name" {
   description = "You AWS SSH KeyName"
 }
+
+variable "vpc_cidr" {
+  type        = string
+  description = "CIDR of the VPC"
+  default     = "192.168.100.0/24"
+}

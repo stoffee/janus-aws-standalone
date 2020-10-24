@@ -39,13 +39,15 @@ output "private_ip" {
 
 output "public_ip" {
   description = "Public IP of instance (or EIP)"
-  value       = join("", aws_instance.janus.*.public_ip)
+#  value       = join("", aws_instance.janus.*.public_ip)
+  value       = aws_instance.janus.public_ip
 }
 
 data "template_file" "cloud-init" {
   template = file("cloud-init.tpl")
 
-  #vars = {
-  #  boinc_project_id = var.boinc_project_id
-  #}
+  vars = {
+    janus_server_name = "${var.route53_janus}.${var.route53_domain}"
+  #  janus_server_ip = aws_instance.janus.public_ip
+  }
 }
